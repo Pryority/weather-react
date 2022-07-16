@@ -1,23 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id='wrapper' className="flex flex-col w-full items-center">
+      <div className='flex w-full bg-slate-300 justify-center p-2'>
+        <h1>Weather Dashboard</h1>
+      </div>
+      <div className='flex flex-col items-center bg-red-100 h-screen p-2'>
+        <div>
+          <h3>Search for a City:</h3>
+        </div>
+        <div>
+          <input placeholder='Toronto' />
+        </div>
+        <div>
+          <button>Search</button>
+        </div>
+        <div className='flex w-full border border-slate-300' />
+      </div>
     </div>
   );
 }
