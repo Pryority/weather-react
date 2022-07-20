@@ -15,7 +15,8 @@ const getWeatherData = (searchType, searchParams) => {
 const formatCurrentWeather = (data) => {
     const {
         coord: { lat, lon },
-        main: { temp, feels_like, min_temp, max_temp, humidity, uv },
+        main: { temp, feels_like, min_temp, max_temp, humidity },
+        uvi,
         name,
         dt,
         weather,
@@ -32,7 +33,7 @@ const formatCurrentWeather = (data) => {
         min_temp,
         max_temp,
         humidity,
-        uv,
+        uvi,
         name,
         dt,
         details,
