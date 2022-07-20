@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios'
 import ForecastColumn from "./ForecastColumn";
+import getWeatherData from "../services/weatherService";
+import getFormattedWeatherData from "../services/weatherService";
 
 const Main = () => {
     const [weather, setWeather] = useState('');
@@ -15,6 +17,13 @@ const Main = () => {
         "Paris",
         "Mumbai",
     ]
+
+    const fetchWeather = async () => {
+        const data = await getFormattedWeatherData({ q: 'toronto' });
+        console.log('Weather fetch:', data);
+    }
+
+    fetchWeather();
 
     const cityListItems = defaultCities.map((defaultCity) =>
         <p key={defaultCity.toString()} className='flex w-full bg-slate-100 border p-2 rounded-md justify-center items-center'>{defaultCity}</p>
@@ -89,10 +98,6 @@ const Main = () => {
         getForecast(data.coord.lat, data.coord.lon);
     }
 
-    // useEffect(() => {
-    //     getLocationData();
-    // }, []);
-
     return (
         <div id='wrapper' className="flex flex-col w-full items-center">
             <div className='flex w-full bg-slate-300 justify-center p-2'>
@@ -155,7 +160,32 @@ const Main = () => {
                             </div>
                         </div>
                     </div>
-                    <ForecastColumn />
+                    {/* <ForecastColumn /> */}
+                    <div className='flex w-full justify-start p-2'>
+                        <div className='flex flex-col w-full bg-slate-400 p-4 rounded-md'>
+                            <h2 className='text-3xl font-medium mb-2'>2022-07-15</h2>
+                            <div
+                                id='weather-info-col'
+                                className='flex flex-col'>
+                                <div className='flex space-x-2 items-center'>
+                                    <p id='city-weather-info'>Temp:</p>
+                                    <p id='city-weather-data'>{forecast.temp}</p>
+                                </div>
+                                <div className='flex space-x-2 items-center'>
+                                    <p id='city-weather-info'>Wind:</p>
+                                    <p id='city-weather-data'>5 km/h</p>
+                                </div>
+                                <div className='flex space-x-2 items-center'>
+                                    <p id='city-weather-info'>Humidity:</p>
+                                    <p id='city-weather-data'>46%</p>
+                                </div>
+                                <div className='flex space-x-2 items-center'>
+                                    <p id='city-weather-info'>UV Index:</p>
+                                    <p id='city-weather-data'>4</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
