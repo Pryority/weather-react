@@ -79,4 +79,8 @@ const getFormattedWeatherData = async (searchParams) => {
 
 const formatToLocalTime = (secs, zone, format = "cccc, dd mm LLL yyyy' | Local time: 'hh:mm a") => DateTime.fromSeconds(secs).setZone(zone).toFormat(format);
 
+const getIconUrl = (icon) => `http://openweathermap.org/img/wn/${icon}@2x.png`;
+
 export default getFormattedWeatherData;
+
+export { formatToLocalTime, getIconUrl };
