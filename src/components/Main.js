@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios'
+import ForecastColumn from "./ForecastColumn";
 
 const Main = () => {
     const [weather, setWeather] = useState('');
-    const [city, setCity] = useState('Toronto');
+    const [city, setCity] = useState('Tokyo');
+    const [location, setLocation] = useState('');
+    const [forecast, setForecast] = useState('');
 
     const defaultCities = [
         "Ottawa",
@@ -17,10 +20,10 @@ const Main = () => {
         <p key={defaultCity.toString()} className='flex w-full bg-slate-100 border p-2 rounded-md justify-center items-center'>{defaultCity}</p>
     );
 
-    const apiCall = async (e) => {
+    /* const apiCall = async (e) => {
         e.preventDefault();
         // const loc = e.target.value
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=85b2f1bdec6377177c781dc904257b09&units=metric`;
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=60b824a594dce68730bab043decd40d5&units=metric`;
         const req = axios.get(url);
         const res = await req;
         setWeather({
@@ -33,17 +36,46 @@ const Main = () => {
 
         // setCity(res.data)
         console.log(res);
-
-    }
+    } */
 
     const searchCity = (event) => {
         if (event.key === 'Enter' || 'Submit' || 'Click') {
-            apiCall(event);
+            // apiCall(event);
+            getLocationData();
         }
     }
 
-    const getData = async () => {
-        const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=85b2f1bdec6377177c781dc904257b09&units=metric`);
+    const [lat, setLat] = useState('');
+    const [lon, setLon] = useState('');
+
+    const geocode = async () => {
+        const { data } = await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=60b824a594dce68730bab043decd40d5`);
+        setLat(data.lat)
+        setLon(data.lon)
+        setLocation({ lat: lat, lon: lon })
+        console.log('Geocode Data:', data)
+
+
+        // getForecastData();
+    }
+
+    const getForecast = async (lat, lon) => {
+        const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=60b824a594dce68730bab043decd40d5`);
+        // setForecast({
+        //     city: data.name,
+        //     coord: data.coord,
+        //     descp: data.weather[0].description,
+        //     temp: data.main.temp,
+        //     humidity: data.main.humidity,
+        //     wind: data.wind.speed,
+        //     uv: data.main.uv,
+        // })
+        // geocode();
+        console.log('Forecast:', data);
+    }
+
+    const getLocationData = async () => {
+        const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=60b824a594dce68730bab043decd40d5&units=metric`);
         setWeather({
             city: data.name,
             coord: data.coord,
@@ -53,10 +85,13 @@ const Main = () => {
             wind: data.wind.speed,
             uv: data.main.uv,
         })
-    };
-    useEffect(() => {
-        getData();
-    }, []);
+        console.log('Search Location Data:', data)
+        getForecast(data.coord.lat, data.coord.lon);
+    }
+
+    // useEffect(() => {
+    //     getLocationData();
+    // }, []);
 
     return (
         <div id='wrapper' className="flex flex-col w-full items-center">
@@ -75,10 +110,9 @@ const Main = () => {
                                 <input
                                     type='text'
                                     value={city}
-                                    onSubmit={apiCall}
+                                    // onSubmit={apiCall}
                                     onChange={(e) => setCity(e.target.value)}
-                                    // onKeyUp={searchCity}
-                                    placeholder='Toronto'
+                                    placeholder='Enter a city'
                                     className='p-2 rounded-md border'
                                 />
                             </div>
@@ -95,7 +129,7 @@ const Main = () => {
                         </div>
                     </div>
                 </div>
-                <div id='single-city' className='flex w-full'>
+                <div id='single-city' className='flex flex-col w-full'>
                     <div className='flex w-full justify-start p-2'>
                         <div className='flex flex-col w-full bg-slate-400 p-4 rounded-md'>
                             <h2 className='text-3xl font-medium mb-2'>{weather.city}</h2>
@@ -121,8 +155,9 @@ const Main = () => {
                             </div>
                         </div>
                     </div>
+                    <ForecastColumn />
                 </div>
-                {/* <ForecastColumn /> */}
+
             </div>
         </div >
     )
