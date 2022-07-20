@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios'
-import ForecastColumn from "./ForecastColumn";
 import getFormattedWeatherData from "../services/weatherService";
 
 import Search from './Search';
 import SingleForecast from './SingleForecast';
-
+import MultiForecast from './MultiForecast';
 const Main = () => {
     const [query, useQuery] = useState({ q: 'Toronto' })
     const [units, setUnits] = useState('Metric');
@@ -28,7 +27,10 @@ const Main = () => {
                 {weather && (
                     <>
                         <Search />
-                        <SingleForecast weather={weather}/>
+                        <div className="flex flex-col">
+                            <SingleForecast weather={weather} />
+                            <MultiForecast items={weather.hourly} />
+                        </div>
                     </>
                 )}
             </div>

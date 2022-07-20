@@ -1,17 +1,18 @@
 import React from 'react'
 
-export default function Forecast() {
+export default function Forecast({ items }) {
     return (
-        <div id='single-city' className='flex w-full'>
-            <div className='flex w-full justify-start p-2'>
-                <div className='flex flex-col w-full bg-slate-400 p-4 rounded-md'>
+        <div className='flex flex-wrap w-full p-4 gap-2 items-center justify-center'>
+
+            {items.map(item => (
+                <div className='bg-slate-400 rounded-md p-2 '>
                     <h2 className='text-3xl font-medium mb-2'>2022-07-15</h2>
                     <div
                         id='weather-info-col'
                         className='flex flex-col'>
                         <div className='flex space-x-2 items-center'>
                             <p id='city-weather-info'>Temp:</p>
-                            <p id='city-weather-data'>20ºC</p>
+                            <p id='city-weather-data'>{`ad`}</p>
                         </div>
                         <div className='flex space-x-2 items-center'>
                             <p id='city-weather-info'>Wind:</p>
@@ -27,7 +28,7 @@ export default function Forecast() {
                         </div>
                     </div>
                 </div>
-            </div>
+            ))}
         </div>
     )
 }

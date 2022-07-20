@@ -48,7 +48,6 @@ export default function Search() {
                     </div>
                     <div className='flex w-full border border-slate-300' />
                     <div className='flex flex-col space-y-2 w-full'>{cityListItems}</div>
-                    <p>CITY NAME</p>
                 </div>
             </div>
         </div>
