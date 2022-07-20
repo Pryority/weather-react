@@ -1,18 +1,29 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import ForecastColumn from './ForecastColumn'
+
+console.log(process.env.REACT_APP_API_KEY)
+const API_KEY = process.env.REACT_APP_API_KEY;
+console.log(API_KEY)
 
 const Main = () => {
     const [weather, setWeather] = useState('');
-    const [city, setCity] = useState('');
-    const url = `${process.env.REACT_APP_API_URL}`;
-    const apiKey = process.env.REACT_APP_API_KEY;
+    const [city, setCity] = useState([]);
 
+    const defaultCities = [
+        "Ottawa",
+        "New York",
+        "Tokyo",
+        "Paris",
+        "Mumbai",
+    ]
 
+    const cityListItems = defaultCities.map((defaultCity) =>
+        <p key={defaultCity.toString()} className='flex w-full bg-slate-100 border p-2 rounded-md justify-center items-center'>{defaultCity}</p>
+    );
     const apiCall = async (e) => {
         e.preventDefault();
         // const loc = e.target.value
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=85b2f1bdec6377177c781dc904257b09`;
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
         const req = axios.get(url);
         const res = await req;
         setWeather({
@@ -32,9 +43,9 @@ const Main = () => {
         if (event.key === 'Enter' || 'Submit' || 'Click') {
             apiCall(event);
             // setWeatherData(response.data);
-
         }
     }
+
 
     return (
         <div id='wrapper' className="flex flex-col w-full items-center">
@@ -67,12 +78,39 @@ const Main = () => {
                                 </button>
                             </div>
                             <div className='flex w-full border border-slate-300' />
-                            <p>{city.name}</p>
+                            <div className='flex flex-col space-y-2 w-full'>{cityListItems}</div>
                             <p>CITY NAME</p>
                         </div>
                     </div>
                 </div>
-                <ForecastColumn />
+                <div id='single-city' className='flex w-full'>
+                    <div className='flex w-full justify-start p-2'>
+                        <div className='flex flex-col w-full bg-slate-400 p-4 rounded-md'>
+                            <h2 className='text-3xl font-medium mb-2'>{weather.name}</h2>
+                            <div
+                                id='weather-info-col'
+                                className='flex flex-col'>
+                                <div className='flex space-x-2 items-center'>
+                                    <p id='city-weather-info'>Temp:</p>
+                                    <p id='city-weather-data'>{ }</p>
+                                </div>
+                                <div className='flex space-x-2 items-center'>
+                                    <p id='city-weather-info'>Wind:</p>
+                                    <p id='city-weather-data'>{ }</p>
+                                </div>
+                                <div className='flex space-x-2 items-center'>
+                                    <p id='city-weather-info'>Humidity:</p>
+                                    <p id='city-weather-data'>46%</p>
+                                </div>
+                                <div className='flex space-x-2 items-center'>
+                                    <p id='city-weather-info'>UV Index:</p>
+                                    <p id='city-weather-data'>4</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {/* <ForecastColumn /> */}
             </div>
         </div >
     )
