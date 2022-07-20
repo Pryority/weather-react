@@ -6,7 +6,7 @@ import Search from './Search';
 import SingleForecast from './SingleForecast';
 import MultiForecast from './MultiForecast';
 const Main = () => {
-    const [query, useQuery] = useState({ q: 'Toronto' })
+    const [query, setQuery] = useState({ q: 'Toronto' })
     const [units, setUnits] = useState('Metric');
     const [weather, setWeather] = useState(null);
 
@@ -26,7 +26,7 @@ const Main = () => {
             <div className='flex w-full h-screen'>
                 {weather && (
                     <>
-                        <Search />
+                        <Search setQuery={setQuery}/>
                         <div className="flex flex-col">
                             <SingleForecast weather={weather} />
                             <MultiForecast items={weather.hourly} />

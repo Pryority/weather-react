@@ -1,6 +1,7 @@
+import { getSuggestedQuery } from '@testing-library/react';
 import React, { useState } from 'react'
 
-export default function Search() {
+export default function Search({ setQuery }) {
     const [city, setCity] = useState('');
 
     const defaultCities = [
@@ -12,7 +13,13 @@ export default function Search() {
     ]
 
     const cityListItems = defaultCities.map((defaultCity) =>
-        <p key={defaultCity.toString()} className='flex w-full bg-slate-100 border p-2 rounded-md justify-center items-center'>{defaultCity}</p>
+        <button
+            key={defaultCity.toString()}
+            className='flex w-full bg-slate-100 border p-2 rounded-md justify-center items-center'
+            onClick={(() => setQuery({ q: defaultCity }))}
+        >
+            {defaultCity}
+        </button>
     );
 
     const searchCity = (event) => {
@@ -41,7 +48,7 @@ export default function Search() {
                     </div>
                     <div className='flex w-full'>
                         <button className='bg-blue-400 p-2 px-4 rounded-md w-full border text-white font-semibold'
-                            onClick={searchCity}
+                            onClick={(() => setQuery({ q: city }))}
                         >
                             Search
                         </button>

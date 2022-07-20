@@ -3,9 +3,8 @@ import React from 'react'
 export default function Forecast({ items }) {
     return (
         <div className='flex flex-wrap w-full p-4 gap-2 items-center justify-center'>
-
-            {items.map(item => (
-                <div className='bg-slate-400 rounded-md p-2 '>
+            {items.map((item, index) => (
+                <div key={index} className='bg-slate-400 rounded-md p-2 '>
                     <h2 className='text-3xl font-medium mb-2'>2022-07-15</h2>
                     <div
                         id='weather-info-col'
