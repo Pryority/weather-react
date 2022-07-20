@@ -1,13 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from "react";
 import axios from 'axios'
-
-console.log(process.env.REACT_APP_API_KEY)
-const API_KEY = process.env.REACT_APP_API_KEY;
-console.log(API_KEY)
 
 const Main = () => {
     const [weather, setWeather] = useState('');
-    const [city, setCity] = useState([]);
+    const [city, setCity] = useState('Toronto');
 
     const defaultCities = [
         "Ottawa",
@@ -20,10 +16,11 @@ const Main = () => {
     const cityListItems = defaultCities.map((defaultCity) =>
         <p key={defaultCity.toString()} className='flex w-full bg-slate-100 border p-2 rounded-md justify-center items-center'>{defaultCity}</p>
     );
+
     const apiCall = async (e) => {
         e.preventDefault();
         // const loc = e.target.value
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=85b2f1bdec6377177c781dc904257b09&units=metric`;
         const req = axios.get(url);
         const res = await req;
         setWeather({
@@ -31,10 +28,10 @@ const Main = () => {
             temp: res.data.main.temp,
             city: res.data.name,
             humidity: res.data.main.humidity,
-            press: res.data.main.pressure,
+            uv: res.data.main.uv,
         })
 
-        setCity(res.data.name)
+        // setCity(res.data)
         console.log(res);
 
     }
@@ -42,16 +39,31 @@ const Main = () => {
     const searchCity = (event) => {
         if (event.key === 'Enter' || 'Submit' || 'Click') {
             apiCall(event);
-            // setWeatherData(response.data);
         }
     }
 
+    const getData = async () => {
+        const { data } = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=85b2f1bdec6377177c781dc904257b09&units=metric`);
+        setWeather({
+            city: data.name,
+            coord: data.coord,
+            descp: data.weather[0].description,
+            temp: data.main.temp,
+            humidity: data.main.humidity,
+            wind: data.wind.speed,
+            uv: data.main.uv,
+        })
+    };
+    useEffect(() => {
+        getData();
+    }, []);
 
     return (
         <div id='wrapper' className="flex flex-col w-full items-center">
             <div className='flex w-full bg-slate-300 justify-center p-2'>
                 <h1>Weather Dashboard</h1>
             </div>
+            <div>{JSON.stringify((weather))}</div>
             <div className='flex w-full h-screen'>
                 <div id='city-search'>
                     <div className='p-2'>
@@ -86,21 +98,21 @@ const Main = () => {
                 <div id='single-city' className='flex w-full'>
                     <div className='flex w-full justify-start p-2'>
                         <div className='flex flex-col w-full bg-slate-400 p-4 rounded-md'>
-                            <h2 className='text-3xl font-medium mb-2'>{weather.name}</h2>
+                            <h2 className='text-3xl font-medium mb-2'>{weather.city}</h2>
                             <div
                                 id='weather-info-col'
                                 className='flex flex-col'>
                                 <div className='flex space-x-2 items-center'>
                                     <p id='city-weather-info'>Temp:</p>
-                                    <p id='city-weather-data'>{ }</p>
+                                    <p id='city-weather-data'>{weather.temp}</p>
                                 </div>
                                 <div className='flex space-x-2 items-center'>
                                     <p id='city-weather-info'>Wind:</p>
-                                    <p id='city-weather-data'>{ }</p>
+                                    <p id='city-weather-data'>{weather.wind} km/h</p>
                                 </div>
                                 <div className='flex space-x-2 items-center'>
                                     <p id='city-weather-info'>Humidity:</p>
-                                    <p id='city-weather-data'>46%</p>
+                                    <p id='city-weather-data'>{weather.humidity}%</p>
                                 </div>
                                 <div className='flex space-x-2 items-center'>
                                     <p id='city-weather-info'>UV Index:</p>
