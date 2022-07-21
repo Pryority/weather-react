@@ -1,4 +1,18 @@
-# Getting Started with Create React App
+# Weather Dashboard
+
+### This application focuses on making server side API calls to OpenWeatherMaps to load weather data upon user request.
+
+# Stack
+
+React, Tailwindcss, Luxon
+
+### Demo
+
+![A demo of the application](./src/assets/images/demo.png)
+
+# Installation
+
+## Getting Started with React Apps
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
