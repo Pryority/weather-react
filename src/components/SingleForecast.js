@@ -1,8 +1,8 @@
 import React from 'react'
-// import getIconUrl from '../services/weatherService'
+import getIconUrl from '../services/weatherService'
 
 // function SingleForecast({ weather }) {
-function SingleForecast({ weather: { name, temp, speed, humidity } }) {
+function SingleForecast({ weather: { name, temp, speed, humidity, icon } }) {
     return (
         <div id='single-city' className='flex flex-col w-full'>
             <div className='flex w-full justify-start p-2'>
@@ -10,7 +10,7 @@ function SingleForecast({ weather: { name, temp, speed, humidity } }) {
 
                     <div>
                         <h2 className='text-3xl font-medium mb-2'>{`${name}`}</h2>
-                        {/* <img src={getIconUrl()} alt='icon' className='w-12' /> */}
+                        <img src='' alt='icon' className='w-12' />
                         <div
                             id='weather-info-col'
                             className='flex flex-col'>

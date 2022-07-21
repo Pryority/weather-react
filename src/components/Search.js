@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 export default function Search({ setQuery }) {
     const [city, setCity] = useState('');
@@ -14,7 +14,6 @@ export default function Search({ setQuery }) {
             {defaultCity}
         </button>
     );
-
 
     function setQueryAndSaveCity() {
         setQuery({ q: city });
