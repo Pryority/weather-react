@@ -46,7 +46,9 @@ const formatForecastWeather = (data) => {
         return {
             title: formatToLocalTime(d.dt, timezone, 'ccc'),
             temp: d.temp.day,
-            icon: d.weather[0].icon
+            icon: d.weather[0].icon,
+            humidity: d.humidity,
+            speed: d.speed
         }
     });
 

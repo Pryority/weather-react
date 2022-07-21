@@ -31,7 +31,7 @@ const Main = () => {
                         <div className="flex flex-col">
                             <SingleForecast weather={weather} />
                             <div className="w-1/2 text-sm">
-                            <div>{JSON.stringify(weather.daily)}</div>
+                            {/* <div>{JSON.stringify(weather.daily)}</div> */}
                             </div>
                             <Forecast weather={weather} items={weather.daily} />
                         </div>
