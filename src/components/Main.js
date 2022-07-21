@@ -20,9 +20,8 @@ const Main = () => {
 
     return (
         <div id='wrapper' className="flex flex-col w-full items-center">
-            <div className='flex w-full bg-slate-300 justify-center p-2'>
-            
-                <h1>Weather Dashboard</h1>
+            <div className='flex w-full bg-sky-200 justify-end p-4'>
+                <h1 className="text-2xl font-mediumd">Weather Dashboard</h1>
             </div>
             <div className='flex w-full h-screen'>
                 {weather && (

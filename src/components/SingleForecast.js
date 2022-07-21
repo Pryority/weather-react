@@ -6,7 +6,7 @@ function SingleForecast({ weather: { name, temp, speed, humidity } }) {
     return (
         <div id='single-city' className='flex flex-col w-full'>
             <div className='flex w-full justify-start p-2'>
-                <div className='flex flex-col w-full bg-slate-400 p-4 rounded-md'>
+                <div className='flex flex-col w-full bg-sky-200 p-4 rounded-md'>
 
                     <div>
                         <h2 className='text-3xl font-medium mb-2'>{`${name}`}</h2>

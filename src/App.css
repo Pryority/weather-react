@@ -36,12 +36,3 @@
     transform: rotate(360deg);
   }
 }
-
-#city-weather-info {
-  font-weight: 400;
-}
-
-#city-weather-data {
-  font-weight: 700;
-  font-size: 1.25rem;
-}

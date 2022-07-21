@@ -48,7 +48,7 @@ const formatForecastWeather = (data) => {
             temp: d.temp.day,
             icon: d.weather[0].icon,
             humidity: d.humidity,
-            speed: d.speed
+            max_temp: d.temp.max
         }
     });
 

@@ -1,35 +1,31 @@
 import React from 'react'
 import { getIconUrl } from '../services/weatherService'
 
-export default function Forecast({ title, speed, wind, humidity, items }) {
+export default function Forecast({ title, temp, max_temp, humidity, items }) {
     console.log(items)
     return (
         <div className='flex flex-wrap w-full p-4 gap-2 items-center justify-center'>
             {items.map((i, index) => (
-                <div key={index} className='bg-slate-400 rounded-md p-2 '>
+                <div key={index} className='bg-sky-200 border-2 rounded-md p-4 shadow-sm'>
                     <div className='flex w-full justify-between'>
-                        <h2 className='text-3xl font-medium mb-2'>{`${i.title}`}</h2>
-                        <img src={getIconUrl(i.icon)} alt='weather icon' className='w-16' />
+                        <h2 className='text-black font-light text-3xl font-medium mb-2'>{`${i.title}`}</h2>
+                        <img src={getIconUrl(i.icon)} alt='weather icon' className='w-24' />
                     </div>
                     <div
                         id='weather-info-col'
                         className='flex flex-col'>
                         <div className='flex space-x-2 items-center'>
-                            <p id='city-weather-info'>Temp:</p>
-                            <p id='city-weather-data'>{`${i.temp}`}</p>
+                            <p className='text-zinc-600 font-light' id='city-weather-info'>Temp:</p>
+                            <p className='text-black font-medium' id='city-weather-data'>{`${i.temp}`}</p>
                         </div>
                         <div className='flex space-x-2 items-center'>
-                            <p id='city-weather-info'>Wind:</p>
-                            <p id='city-weather-data'>{`${i.speed}`} km/h</p>
+                            <p className='text-zinc-600 font-light' id='city-weather-info'>Max Temp:</p>
+                            <p className='text-black font-medium' id='city-weather-data'>{`${i.max_temp}`} km/h</p>
                         </div>
                         <div className='flex space-x-2 items-center'>
-                            <p id='city-weather-info'>Humidity:</p>
-                            <p id='city-weather-data'>{`${i.humidity}`}%</p>
+                            <p className='text-zinc-600 font-light' id='city-weather-info'>Humidity:</p>
+                            <p className='text-black font-medium' id='city-weather-data'>{`${i.humidity}`}%</p>
                         </div>
-                        {/* <div className='flex space-x-2 items-center'>
-                            <p id='city-weather-info'>UV Index:</p>
-                            <p id='city-weather-data'>4</p>
-                        </div> */}
                     </div>
                 </div>
             ))}

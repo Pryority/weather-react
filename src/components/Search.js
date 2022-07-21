@@ -15,7 +15,7 @@ export default function Search({ setQuery }) {
     const cityListItems = defaultCities.map((defaultCity) =>
         <button
             key={defaultCity.toString()}
-            className='flex w-full bg-slate-100 border p-2 rounded-md justify-center items-center'
+            className='flex w-full bg-blue-200 border p-2 rounded-md justify-center items-center font-medium'
             onClick={(() => setQuery({ q: defaultCity }))}
         >
             {defaultCity}
@@ -32,7 +32,7 @@ export default function Search({ setQuery }) {
     return (
         <div id='city-search'>
             <div className='p-2'>
-                <div className='flex flex-col space-y-4 items-center bg-red-100 p-2 rounded-md h-screen'>
+                <div className='flex flex-col space-y-4 items-center bg-sky-100 p-2 rounded-md h-screen'>
                     <div className='flex w-full justify-start'>
                         <h3 className='font-medium'>Search for a City:</h3>
                     </div>
