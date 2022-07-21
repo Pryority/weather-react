@@ -1,6 +1,6 @@
 import React from 'react'
 
-function SingleForecast({ weather: { name, temp, speed, humidity, icon } }) {
+function SingleForecast({ weather: { name, temp, speed, humidity } }) {
     return (
         <div id='single-city' className='flex flex-col w-full'>
             <div className='flex w-full justify-start p-2'>
