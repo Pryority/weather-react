@@ -57,6 +57,7 @@ export default function Search({ setQuery }) {
                     <div className='flex flex-col space-y-2 w-full'>{cityListItems}</div>
                 </div>
             </div>
+
         </div>
     )
 }

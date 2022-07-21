@@ -4,7 +4,7 @@ import getFormattedWeatherData from "../services/weatherService";
 
 import Search from './Search';
 import SingleForecast from './SingleForecast';
-import MultiForecast from './MultiForecast';
+import Forecast from './Forecast';
 const Main = () => {
     const [query, setQuery] = useState({ q: 'Toronto' })
     const [units, setUnits] = useState('Metric');
@@ -21,6 +21,7 @@ const Main = () => {
     return (
         <div id='wrapper' className="flex flex-col w-full items-center">
             <div className='flex w-full bg-slate-300 justify-center p-2'>
+            
                 <h1>Weather Dashboard</h1>
             </div>
             <div className='flex w-full h-screen'>
@@ -29,7 +30,10 @@ const Main = () => {
                         <Search setQuery={setQuery}/>
                         <div className="flex flex-col">
                             <SingleForecast weather={weather} />
-                            <MultiForecast items={weather.hourly} />
+                            <div className="w-1/2 text-sm">
+                            <div>{JSON.stringify(weather.daily)}</div>
+                            </div>
+                            <Forecast weather={weather} items={weather.daily} />
                         </div>
                     </>
                 )}
