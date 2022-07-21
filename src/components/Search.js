@@ -4,20 +4,6 @@ export default function Search({ setQuery }) {
     const [city, setCity] = useState('');
     const [searchHistory, setSearchHistory] = useState([]);
     const [cityList, setCityList] = useState([]);
-    // "Ottawa",
-    // "New York",
-    // "Tokyo",
-    // "Paris",
-    // "Mumbai",
-
-
-    // const defaultCities = [
-    //     "Ottawa",
-    //     "New York",
-    //     "Tokyo",
-    //     "Paris",
-    //     "Mumbai",
-    // ]
 
     const cityListItems = searchHistory.map((defaultCity) =>
         <button
@@ -29,11 +15,14 @@ export default function Search({ setQuery }) {
         </button>
     );
 
-    const searchCity = (event) => {
-        if (event.key === 'Enter' || 'Submit' || 'Click') {
-            // apiCall(event);
-            // getLocationData();
-        }
+
+    function setQueryAndSaveCity() {
+        setQuery({ q: city });
+        cityList.push(city);
+        setSearchHistory(cityList);
+        JSON.stringify(searchHistory);
+        localStorage.setItem('search-history', JSON.stringify(searchHistory));
+        console.log('Search history:', searchHistory);
     }
 
     return (
@@ -55,14 +44,7 @@ export default function Search({ setQuery }) {
                     </div>
                     <div className='flex w-full'>
                         <button className='bg-blue-400 p-2 px-4 rounded-md w-full border text-white font-semibold'
-                            onClick={(() => {
-                                setQuery({ q: city })
-                                cityList.push(city)
-                                setSearchHistory(cityList)
-                                JSON.stringify(searchHistory)
-                                localStorage.setItem('search-history', JSON.stringify(searchHistory));
-                                console.log('Search history:', searchHistory)
-                            })}
+                            onClick={(() => { setQueryAndSaveCity() })}
                         >
                             Search
                         </button>
