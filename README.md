@@ -6,7 +6,7 @@
 
 React, Tailwindcss, Luxon
 
-### Demo
+### Demo the App - [https://weather-dashboard-mp.herokuapp.com/](https://weather-dashboard-mp.herokuapp.com/)
 
 ![A demo of the application](./src/assets/images/demo.png)
 
