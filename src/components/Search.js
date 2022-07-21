@@ -1,21 +1,28 @@
-import { getSuggestedQuery } from '@testing-library/react';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function Search({ setQuery }) {
     const [city, setCity] = useState('');
+    const [searchHistory, setSearchHistory] = useState([]);
+    const [cityList, setCityList] = useState([]);
+    // "Ottawa",
+    // "New York",
+    // "Tokyo",
+    // "Paris",
+    // "Mumbai",
 
-    const defaultCities = [
-        "Ottawa",
-        "New York",
-        "Tokyo",
-        "Paris",
-        "Mumbai",
-    ]
 
-    const cityListItems = defaultCities.map((defaultCity) =>
+    // const defaultCities = [
+    //     "Ottawa",
+    //     "New York",
+    //     "Tokyo",
+    //     "Paris",
+    //     "Mumbai",
+    // ]
+
+    const cityListItems = searchHistory.map((defaultCity) =>
         <button
             key={defaultCity.toString()}
-            className='flex w-full bg-blue-200 border p-2 rounded-md justify-center items-center font-medium'
+            className='flex w-full bg-blue-200 border p-2 rounded-md justify-center items-center font-medium capitalize'
             onClick={(() => setQuery({ q: defaultCity }))}
         >
             {defaultCity}
@@ -48,7 +55,14 @@ export default function Search({ setQuery }) {
                     </div>
                     <div className='flex w-full'>
                         <button className='bg-blue-400 p-2 px-4 rounded-md w-full border text-white font-semibold'
-                            onClick={(() => setQuery({ q: city }))}
+                            onClick={(() => {
+                                setQuery({ q: city })
+                                cityList.push(city)
+                                setSearchHistory(cityList)
+                                JSON.stringify(searchHistory)
+                                localStorage.setItem('search-history', JSON.stringify(searchHistory));
+                                console.log('Search history:', searchHistory)
+                            })}
                         >
                             Search
                         </button>

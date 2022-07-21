@@ -8,6 +8,7 @@ const Main = () => {
     const [query, setQuery] = useState({ q: 'Toronto' })
     const [units, setUnits] = useState('Metric');
     const [weather, setWeather] = useState(null);
+    const [history, setHistory] = useState([]);
 
     useEffect(() => {
         const fetchWeather = async () => {

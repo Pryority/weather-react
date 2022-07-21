@@ -2,7 +2,7 @@ import React from 'react'
 import { getIconUrl } from '../services/weatherService'
 
 export default function Forecast({ title, temp, max_temp, humidity, items }) {
-    console.log(items)
+    console.log(`5-Day Forecast:`, items)
     return (
         <div className='flex flex-wrap w-full p-4 gap-2 items-center justify-around'>
             {items.map((i, index) => (
