@@ -4,9 +4,9 @@ import { getIconUrl } from '../services/weatherService'
 export default function Forecast({ title, temp, max_temp, humidity, items }) {
     console.log(items)
     return (
-        <div className='flex flex-wrap w-full p-4 gap-2 items-center justify-center'>
+        <div className='flex flex-wrap w-full p-4 gap-2 items-center justify-around'>
             {items.map((i, index) => (
-                <div key={index} className='bg-sky-200 border-2 rounded-md p-4 shadow-sm'>
+                <div key={index} className='bg-sky-200 border-2 rounded-md p-8 shadow-sm'>
                     <div className='flex w-full justify-between'>
                         <h2 className='text-black font-light text-3xl font-medium mb-2'>{`${i.title}`}</h2>
                         <img src={getIconUrl(i.icon)} alt='weather icon' className='w-24' />

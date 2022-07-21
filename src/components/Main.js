@@ -27,7 +27,7 @@ const Main = () => {
                 {weather && (
                     <>
                         <Search setQuery={setQuery}/>
-                        <div className="flex flex-col">
+                        <div className="flex flex-col w-full">
                             <SingleForecast weather={weather} />
                             <div className="w-1/2 text-sm">
                             {/* <div>{JSON.stringify(weather.daily)}</div> */}
